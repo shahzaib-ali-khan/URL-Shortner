@@ -1,0 +1,32 @@
+[project]
+name = "url-shortner"
+version = "0.1.0"
+description = "Generates user friendly shortened URL"
+authors = [
+    {name = "Shahzaib Ali Khan",email = "shahzaib.ali.k39@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi[standard] (>=0.119.1,<0.120.0)",
+    "uvicorn[standard] (>=0.38.0,<0.39.0)",
+    "sqlmodel (>=0.0.27,<0.0.28)",
+    "pyjwt (>=2.10.1,<3.0.0)",
+    "pydantic-settings (>=2.11.0,<3.0.0)",
+    "python-jose[cryptography] (>=3.5.0,<4.0.0)",
+    "aiosqlite (>=0.21.0,<0.22.0)",
+    "python-multipart (>=0.0.20,<0.0.21)",
+    "bcrypt (>=5.0.0,<6.0.0)"
+]
+
+[dependency-groups]
+dev = [
+    "pytest (>=8.4.2,<9.0.0)",
+    "ruff (>=0.14.1,<0.15.0)",
+    "isort (>=7.0.0,<8.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
