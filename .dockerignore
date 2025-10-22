@@ -1,0 +1,84 @@
+# ======================
+# Python cache & build artifacts
+# ======================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# ======================
+# Virtual environments
+# ======================
+.venv/
+venv/
+env/
+
+# ======================
+# Poetry / pip cache
+# ======================
+poetry.toml
+poetry.lock.bkp
+.cache/
+pip-wheel-metadata/
+*.log
+
+# ======================
+# IDE / Editor files
+# ======================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ======================
+# OS files
+# ======================
+.DS_Store
+Thumbs.db
+
+# ======================
+# Git & CI/CD
+# ======================
+.git/
+.gitignore
+.gitattributes
+.github/
+.gitlab/
+
+# ======================
+# Tests & coverage
+# ======================
+tests/
+.coverage
+htmlcov/
+.tox/
+pytest_cache/
+
+# ======================
+# Docker & Compose artifacts
+# ======================
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+
+# ======================
+# Local config / data
+# ======================
+.env
+*.sqlite
+*.db
+*.db-journal
+*.pid
+
+# ======================
+# Misc
+# ======================
+*.bak
+*.tmp
+*.old
