@@ -2,7 +2,7 @@ import re
 from datetime import datetime
 from typing import Optional
 
-from pydantic import BaseModel, Field, HttpUrl, field_validator
+from pydantic import ConfigDict, BaseModel, Field, HttpUrl, field_validator
 
 
 class URLCreate(BaseModel):
@@ -57,14 +57,12 @@ class URLResponse(BaseModel):
     original_url: str
     short_code: str
     short_url: str  # Full shortened URL
-    title: Optional[str]
+    title: Optional[str] = None
     clicks: int
     is_active: bool
     created_at: datetime
     user_id: str
-
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class URLListResponse(BaseModel):
