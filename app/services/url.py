@@ -1,6 +1,7 @@
 from datetime import datetime, timezone
 from typing import Optional
 
+import structlog
 from fastapi import HTTPException, status
 
 from app.models.url import URL
@@ -8,9 +9,9 @@ from app.repositories.url import URLRepository
 from app.schemas.url import URLCreate, URLUpdate
 from app.services.short_code_generator import (IShortCodeGenerator,
                                                default_generator)
-import structlog
 
 logger = structlog.get_logger(__name__)
+
 
 class URLService:
     MAX_RETRIES = 5  # Maximum retries for generating unique short code
@@ -39,8 +40,10 @@ class URLService:
             )
 
             if existing:
-                logger.info("Preferred short code taken, generating random code",
-                            preferred_short_code=url_data.preferred_short_code)
+                logger.info(
+                    "Preferred short code taken, generating random code",
+                    preferred_short_code=url_data.preferred_short_code,
+                )
                 # Preferred code is taken, fall back to random generation
                 short_code = await self._generate_unique_short_code()
             else:

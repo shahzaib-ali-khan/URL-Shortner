@@ -5,7 +5,7 @@ from typing import Protocol
 
 class IShortCodeGenerator(Protocol):
     """Interface for short code generation strategies."""
-    
+
     def generate(self, length: int = 6) -> str:
         """Generate a short code."""
         ...
