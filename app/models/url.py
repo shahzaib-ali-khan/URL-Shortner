@@ -1,7 +1,7 @@
 from datetime import datetime, timezone
 from typing import Optional
 
-from sqlmodel import Field, Relationship, SQLModel
+from sqlmodel import Field, SQLModel, Column, DateTime
 
 from app.services.util import generate_uuid
 
@@ -18,7 +18,11 @@ class URL(SQLModel, table=True):
     title: Optional[str] = Field(default=None, max_length=255)
     clicks: int = Field(default=0)
     is_active: bool = Field(default=True)
-    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
-    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    created_at: datetime = Field(
+        sa_column=Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
+    )
+    updated_at: datetime = Field(
+        sa_column=Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
+    )
 
     # user: Optional["User"] = Relationship(back_populates="urls")
