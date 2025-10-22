@@ -1,11 +1,8 @@
-import uuid
 from datetime import datetime, timezone
 
 from sqlmodel import Field, SQLModel
 
-
-def generate_uuid() -> str:
-    return str(uuid.uuid4())
+from app.services.util import generate_uuid
 
 
 class User(SQLModel, table=True):

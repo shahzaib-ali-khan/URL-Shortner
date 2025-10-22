@@ -2,7 +2,7 @@ from typing import Annotated
 
 from fastapi import APIRouter, Depends, status
 
-from app.api.dependencies import get_auth_service, get_current_active_user
+from app.api.dependencies.auth import get_auth_service, get_current_active_user
 from app.schemas.user import Token, UserCreate, UserLogin, UserResponse
 from app.services.auth import AuthService
 
@@ -60,26 +60,22 @@ async def get_me(
     return current_user
 
 
-@router.post(
-    "/logout",
-    status_code=status.HTTP_200_OK,
-    summary="Logout user"
-)
+@router.post("/logout", status_code=status.HTTP_200_OK, summary="Logout user")
 async def logout(
-    current_user: Annotated[UserResponse, Depends(get_current_active_user)]
+    current_user: Annotated[UserResponse, Depends(get_current_active_user)],
 ) -> dict[str, str]:
     """
     Logout the currently authenticated user.
-    
+
     Since this is using stateless JWT tokens, the logout is handled client-side
     by deleting the token. This endpoint validates that the token is still valid
     and returns a success message.
-    
+
     **Client should:**
     - Delete the token from local storage/cookies
     - Remove the Authorization header from future requests
     - Redirect to login page
-    
+
     Requires valid JWT token in Authorization header.
     """
     return {
