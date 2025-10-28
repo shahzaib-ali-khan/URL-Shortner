@@ -661,6 +661,28 @@ uvicorn = {version = ">=0.15.0", extras = ["standard"]}
 standard = ["uvicorn[standard] (>=0.15.0)"]
 
 [[package]]
+name = "fastapi-filter"
+version = "2.0.1"
+description = "FastAPI filter"
+optional = false
+python-versions = "<4.0,>=3.9"
+groups = ["main"]
+files = [
+    {file = "fastapi_filter-2.0.1-py3-none-any.whl", hash = "sha256:711d48707ec62f7c9e12a7713fc0f6a99858a9e3741b4d108102d5599e77197d"},
+    {file = "fastapi_filter-2.0.1.tar.gz", hash = "sha256:cffda370097af7e404f1eb188aca58b199084bfaf7cec881e40b404adf12566e"},
+]
+
+[package.dependencies]
+fastapi = ">=0.100.0,<1.0"
+pydantic = ">=2.0.0,<3.0.0"
+
+[package.extras]
+all = ["SQLAlchemy (>=1.4.36,<2.1.0)", "beanie (>=1.26.0,<1.30.0)", "mongoengine (>=0.24.1,<0.28.0)"]
+beanie = ["beanie (>=1.26.0,<1.30.0)"]
+mongoengine = ["mongoengine (>=0.24.1,<0.28.0)"]
+sqlalchemy = ["SQLAlchemy (>=1.4.36,<2.1.0)"]
+
+[[package]]
 name = "greenlet"
 version = "3.2.4"
 description = "Lightweight in-process concurrent programming"
@@ -2466,4 +2488,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.11,<4.0"
-content-hash = "48bcd37da8f6c97647c6f7f20d50e9829ad6cd0ef4f61a0f7f885ba5cd71d92d"
+content-hash = "6dc69ace42c96980ccb290cabba0e9ec31362dbfa90345923a0f33113f901e93"
