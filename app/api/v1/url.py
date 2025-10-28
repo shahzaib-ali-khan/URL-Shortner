@@ -7,8 +7,14 @@ from fastapi_filter import FilterDepends
 from app.api.dependencies.auth import get_current_active_user
 from app.api.dependencies.url import get_url_service
 from app.api.v1.filters.url_filter import URLFilter
-from app.schemas.url import (URLCreate, URLListResponse, URLResolveResponse,
-                             URLResponse, URLStatsResponse, URLUpdate)
+from app.schemas.url import (
+    URLCreate,
+    URLListResponse,
+    URLResolveResponse,
+    URLResponse,
+    URLStatsResponse,
+    URLUpdate,
+)
 from app.schemas.user import UserResponse
 from app.services.url import URLService
 

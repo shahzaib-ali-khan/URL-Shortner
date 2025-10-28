@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta, timezone
-from typing import Optional
+from typing import Any, Optional
 
 import bcrypt
 from jose import JWTError, jwt
@@ -41,7 +41,7 @@ class TokenManager:
         self.access_token_expire_minutes = access_token_expire_minutes
 
     def create_access_token(
-        self, data: dict[str, any], expires_delta: Optional[timedelta] = None
+        self, data: dict[str, Any], expires_delta: Optional[timedelta] = None
     ) -> str:
         """Create a JWT access token."""
         to_encode = data.copy()
@@ -57,7 +57,7 @@ class TokenManager:
         encoded_jwt = jwt.encode(to_encode, self.secret_key, algorithm=self.algorithm)
         return encoded_jwt
 
-    def decode_token(self, token: str) -> Optional[dict[str, any]]:
+    def decode_token(self, token: str) -> Optional[dict[str, Any]]:
         """Decode and validate a JWT token."""
         try:
             payload = jwt.decode(token, self.secret_key, algorithms=[self.algorithm])

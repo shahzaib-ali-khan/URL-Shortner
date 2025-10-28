@@ -8,8 +8,7 @@ from app.api.v1.filters.url_filter import URLFilter
 from app.models.url import URL
 from app.repositories.url import URLRepository
 from app.schemas.url import URLCreate, URLUpdate
-from app.services.short_code_generator import (IShortCodeGenerator,
-                                               default_generator)
+from app.services.short_code_generator import IShortCodeGenerator, default_generator
 
 logger = structlog.get_logger(__name__)
 

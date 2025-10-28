@@ -17,7 +17,7 @@ class UserRepository:
         await self.session.refresh(user)
         return user
 
-    async def get_by_id(self, user_id: int) -> Optional[User]:
+    async def get_by_id(self, user_id: str) -> Optional[User]:
         """Retrieve user by ID."""
         statement = select(User).where(User.id == user_id)
         result = await self.session.execute(statement)

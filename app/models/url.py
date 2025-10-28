@@ -28,5 +28,4 @@ class URL(SQLModel, table=True):
             DateTime(timezone=True), default=lambda: datetime.now(timezone.utc)
         )
     )
-
     # user: Optional["User"] = Relationship(back_populates="urls")

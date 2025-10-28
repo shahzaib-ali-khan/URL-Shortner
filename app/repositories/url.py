@@ -1,8 +1,9 @@
-from typing import Optional
+from typing import Optional, cast
 
-from sqlalchemy import func
+from sqlalchemy import desc, func
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlmodel import select
+from sqlalchemy.sql import ColumnElement
+from sqlmodel import col, select
 
 from app.api.v1.filters.url_filter import URLFilter
 from app.models.url import URL
@@ -42,7 +43,7 @@ class URLRepository:
         statement = (
             select(URL)
             .where(URL.user_id == user_id)
-            .order_by(URL.created_at.desc())
+            .order_by(desc(col(URL.created_at)))
             .offset(skip)
             .limit(limit)
         )
@@ -57,7 +58,9 @@ class URLRepository:
         self, user_id: str, filters: Optional[URLFilter] = None
     ) -> int:
         """Count total URLs for a user."""
-        statement = select(func.count(URL.id)).where(URL.user_id == user_id)
+        statement = select(func.count(cast(ColumnElement[str], URL.id))).where(
+            URL.user_id == user_id
+        )
 
         if filters:
             statement = filters.filter(statement)

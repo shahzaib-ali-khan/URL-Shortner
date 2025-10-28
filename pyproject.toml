@@ -30,7 +30,9 @@ dev = [
     "isort (>=7.0.0,<8.0.0)",
     "pytest-asyncio (>=1.2.0,<2.0.0)",
     "httpx (>=0.28.1,<0.29.0)",
-    "pytest-cov (>=7.0.0,<8.0.0)"
+    "pytest-cov (>=7.0.0,<8.0.0)",
+    "mypy (>=1.18.2,<2.0.0)",
+    "types-python-jose (>=3.5.0.20250531,<4.0.0.0)"
 ]
 
 
@@ -46,3 +48,9 @@ python_files = [
     "*_tests.py",
 ]
 pythonpath = ["."]
+
+[tool.mypy]
+python_version = "3.11"
+files = "app/**/*.py, tests/**/*.py"
+exclude = ['.venv/']
+strict = true

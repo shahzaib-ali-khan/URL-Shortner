@@ -1,7 +1,7 @@
 """Main FastAPI application."""
 
 from contextlib import asynccontextmanager
-from typing import AsyncGenerator
+from typing import AsyncGenerator, cast
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -9,6 +9,7 @@ from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
 from slowapi.middleware import SlowAPIMiddleware
 from slowapi.util import get_remote_address
+from starlette.types import ExceptionHandler
 
 from app.api.v1.router import api_router
 from app.config import settings
@@ -45,7 +46,9 @@ def create_application() -> FastAPI:
 
     # Rate limiting
     application.state.limiter = limiter
-    application.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+    application.add_exception_handler(
+        RateLimitExceeded, cast(ExceptionHandler, _rate_limit_exceeded_handler)
+    )
     application.add_middleware(SlowAPIMiddleware)
 
     # Include API routers
