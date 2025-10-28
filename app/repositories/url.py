@@ -4,8 +4,8 @@ from sqlalchemy import func
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlmodel import select
 
-from app.models.url import URL
 from app.api.v1.filters.url_filter import URLFilter
+from app.models.url import URL
 
 
 class URLRepository:
@@ -32,7 +32,11 @@ class URLRepository:
         return result.scalar_one_or_none()
 
     async def get_by_user_id(
-        self, user_id: str, skip: int = 0, limit: int = 100, filters: Optional[URLFilter] = None
+        self,
+        user_id: str,
+        skip: int = 0,
+        limit: int = 100,
+        filters: Optional[URLFilter] = None,
     ) -> list[URL]:
         """Get all URLs for a user with pagination."""
         statement = (
@@ -48,14 +52,15 @@ class URLRepository:
 
         result = await self.session.execute(statement)
         return list(result.scalars().all())
-    
-    async def count_by_user_id(self, user_id: str, filters: Optional[URLFilter] = None) -> int:
+
+    async def count_by_user_id(
+        self, user_id: str, filters: Optional[URLFilter] = None
+    ) -> int:
         """Count total URLs for a user."""
         statement = select(func.count(URL.id)).where(URL.user_id == user_id)
 
         if filters:
             statement = filters.filter(statement)
-
 
         result = await self.session.execute(statement)
         return result.scalar_one()

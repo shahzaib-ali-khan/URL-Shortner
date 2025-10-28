@@ -6,11 +6,11 @@ from fastapi_filter import FilterDepends
 
 from app.api.dependencies.auth import get_current_active_user
 from app.api.dependencies.url import get_url_service
+from app.api.v1.filters.url_filter import URLFilter
 from app.schemas.url import (URLCreate, URLListResponse, URLResolveResponse,
                              URLResponse, URLStatsResponse, URLUpdate)
 from app.schemas.user import UserResponse
 from app.services.url import URLService
-from app.api.v1.filters.url_filter import URLFilter
 
 router = APIRouter(prefix="/urls", tags=["URL Shortening"])
 
@@ -75,7 +75,9 @@ async def get_my_urls(
     - **page**: Page number (starts from 1)
     - **page_size**: Number of items per page (1-100)
     """
-    urls, total = await url_service.get_user_urls(current_user.id, page, page_size, url_filter)
+    urls, total = await url_service.get_user_urls(
+        current_user.id, page, page_size, url_filter
+    )
 
     url_responses = [
         URLResponse(

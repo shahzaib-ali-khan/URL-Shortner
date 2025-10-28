@@ -4,12 +4,12 @@ from typing import Optional
 import structlog
 from fastapi import HTTPException, status
 
+from app.api.v1.filters.url_filter import URLFilter
 from app.models.url import URL
 from app.repositories.url import URLRepository
 from app.schemas.url import URLCreate, URLUpdate
 from app.services.short_code_generator import (IShortCodeGenerator,
                                                default_generator)
-from app.api.v1.filters.url_filter import URLFilter
 
 logger = structlog.get_logger(__name__)
 
@@ -113,7 +113,11 @@ class URLService:
         return url
 
     async def get_user_urls(
-        self, user_id: str, page: int = 1, page_size: int = 20, filters: Optional[URLFilter] = None
+        self,
+        user_id: str,
+        page: int = 1,
+        page_size: int = 20,
+        filters: Optional[URLFilter] = None,
     ) -> tuple[list[URL], int]:
         """
         Get all URLs for a user with pagination.
@@ -122,7 +126,9 @@ class URLService:
             Tuple of (list of URLs, total count)
         """
         skip = (page - 1) * page_size
-        urls = await self.url_repository.get_by_user_id(user_id, skip, page_size, filters)
+        urls = await self.url_repository.get_by_user_id(
+            user_id, skip, page_size, filters
+        )
         total = await self.url_repository.count_by_user_id(user_id, filters)
         return urls, total
 
