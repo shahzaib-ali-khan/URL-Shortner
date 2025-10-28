@@ -1,5 +1,7 @@
 # FastAPI URL Shortener
 
+[![CI Pipeline](https://github.com/shahzaib-ali-khan/URL-Shortner/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/shahzaib-ali-khan/URL-Shortner/actions/workflows/ci.yml)
+
 A production-ready FastAPI application with JWT authentication and URL shortening capabilities, built with async support and capability to generate user-friendly URLs.
 
 ## Features
